@@ -1,0 +1,91 @@
+.dropdown-stage-wrap {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ── Trigger button ── */
+.menu-wrap { position: relative; }
+
+.trigger {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.65rem 1.25rem;
+  border: solid 1px #eee;
+  border-radius: 999px;
+  background: #fff;
+  box-shadow: 0 2px 2px rgba(0,0,0,0.03), 0 1px 4px rgba(0,0,0,0.03);
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #1a1a2e;
+  cursor: pointer;
+  user-select: none;
+  transition: box-shadow 0.2s ease, background 0.15s ease;
+}
+
+.trigger:hover { background: #fbfbfb; }
+.trigger svg { flex-shrink: 0; }
+
+/* ── Dropdown shared styles ── */
+.dropdown {
+  position: absolute;
+  left: 50%;
+  min-width: 200px;
+  background: #fff;
+  border: solid 1px #eee;
+  border-radius: 14px;
+  box-shadow: 0 2px 2px rgba(0,0,0,0.03), 0 1px 4px rgba(0,0,0,0.03);
+  z-index: 100;
+  padding: 6px;
+}
+
+.dropdown ul { list-style: none; }
+
+.dropdown li a {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  width: 100%;
+  padding: 0.6rem 0.85rem;
+  border-radius: 8px;
+  font-size: 0.875rem;
+  color: #1a1a2e;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.dropdown li a:hover { background: #f4f4f6; }
+
+.dropdown li.danger a { color: #dc2626; }
+.dropdown li.danger a:hover { background: #fee2e2; }
+
+.dropdown li + li { margin-top: 1px; }
+
+/* ── BAD: ease-in, context-unaware origin ── */
+.bad-dropdown {
+  display: block;
+  opacity: 0;
+  transform: translateX(-50%) translateY(6px) scale(0.97);
+  transform-origin: top center;
+  pointer-events: none;
+  transition:
+    opacity 200ms cubic-bezier(0.9,0.03,0.69,0.22),
+    transform 200ms cubic-bezier(0.9,0.03,0.69,0.22);
+}
+
+.bad-dropdown.below {
+  transform: translateX(-50%) translateY(-6px) scale(0.97);
+}
+
+.bad-dropdown.open {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0) scale(1);
+  pointer-events: auto;
+  transition:
+    opacity 200ms ease-in,
+    transform 200ms ease-in;
+}
+
+/* ── GOOD: animation handled by Motion (see GoodDropdown in DropdownAnimation.js) ── */
